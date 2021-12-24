@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_gitlist_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/default_margin"
+        android:contentDescription="@string/img_gitlist_avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_git_broken_image_24" />
+
+    <TextView
+        android:id="@+id/tv_gitlist_repo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintStart_toEndOf="@id/iv_gitlist_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_gitlist_avatar"
+        tools:text="Jake Wharton" />
+
+    <TextView
+        android:id="@+id/tv_gitlist_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toEndOf="@id/iv_gitlist_avatar"
+        app:layout_constraintStart_toStartOf="@id/tv_gitlist_repo"
+        app:layout_constraintTop_toBottomOf="@id/tv_gitlist_repo"
+        tools:text="Butter Knife" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_gitlist_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_gitlist_star"
+        android:src="@drawable/ic_git_star_24"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tv_gitlist_author"
+        app:layout_constraintTop_toBottomOf="@id/tv_gitlist_author" />
+
+    <TextView
+        android:id="@+id/tv_gitlist_star_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/iv_gitlist_star"
+        app:layout_constraintStart_toEndOf="@id/iv_gitlist_star"
+        app:layout_constraintTop_toTopOf="@id/iv_gitlist_star"
+        tools:text="8" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_gitlist_fork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:contentDescription="@string/img_gitlist_forks"
+        android:src="@drawable/ic_git_fork_icon_24"
+        app:layout_constraintStart_toEndOf="@id/tv_gitlist_star_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_gitlist_author" />
+
+    <TextView
+        android:id="@+id/tv_gitlist_fork_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/iv_gitlist_fork"
+        app:layout_constraintStart_toEndOf="@id/iv_gitlist_fork"
+        app:layout_constraintTop_toTopOf="@id/iv_gitlist_fork"
+        tools:text="8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

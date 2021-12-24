@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GitHub Stars</string>
+
+    <string name="alert_default_title">Error</string>
+    <string name="alert_default_message">Something went wrong! Try again.</string>
+    <string name="alert_default_confirm_button">OK</string>
+
+    <string name="img_gitlist_avatar">avatar</string>
+    <string name="img_gitlist_star">Numbers of stars</string>
+    <string name="img_gitlist_forks">Numbers of forks</string>
+</resources>
