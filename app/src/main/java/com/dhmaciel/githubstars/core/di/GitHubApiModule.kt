@@ -2,7 +2,9 @@ package com.dhmaciel.githubstars.core.di
 
 import android.content.Context
 import com.dhmaciel.githubstars.GitHubApplication
+import com.dhmaciel.githubstars.core.interceptor.CacheInterceptor
 import com.dhmaciel.githubstars.core.utils.Constants.BASE_URL
+import com.dhmaciel.githubstars.core.utils.Constants.CACHE_SIZE_BYTES
 import com.dhmaciel.githubstars.home.data.remote.GitHubService
 import com.google.gson.Gson
 import dagger.Module
@@ -22,26 +24,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val CACHE_SIZE_BYTES = 10 * 1024 * 1024L // 10 MB
-
-    @Singleton
-    @Provides
-    fun provideApplication(@ApplicationContext app: Context): GitHubApplication {
-        return app as GitHubApplication
-    }
-
-    @Provides
-    @Singleton
-    fun provideContext(application: GitHubApplication): Context {
-        return application.applicationContext
-    }
 
     @Provides
     @Singleton
     internal fun provideCache(context: Context): Cache {
-        val httpCacheDirectory = File(context.cacheDir.absolutePath, "HttpCache")
-        return Cache(httpCacheDirectory, CACHE_SIZE_BYTES)
+        return Cache(context.cacheDir, CACHE_SIZE_BYTES)
     }
+
+    @Provides
+    @Singleton
+    internal fun provideCacheInterceptor() = CacheInterceptor()
 
     @Singleton
     @Provides
@@ -52,9 +44,14 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache): OkHttpClient =
+    fun providesOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        cache: Cache,
+        cacheInterceptor: CacheInterceptor
+    ): OkHttpClient =
         OkHttpClient
             .Builder()
+            .addNetworkInterceptor(cacheInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .cache(cache)
             .build()
